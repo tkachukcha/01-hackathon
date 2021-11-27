@@ -3,9 +3,9 @@ import {
   ContextMenu
 } from './menu';
 import { BackgroundModule } from './modules/background.module';
-// import {
-//   SoundModule
-// } from './modules/sound.module';
+import {
+  SoundModule
+} from './modules/sound.module';
 
 const menu = new ContextMenu('#menu');
 
