@@ -24,6 +24,7 @@ document.body.addEventListener('contextmenu', (e) => {
     modules.forEach(item => {
       if (item.type === moduleType) {
         item.trigger(e);
+        menu.close();
       }
     });
   });
