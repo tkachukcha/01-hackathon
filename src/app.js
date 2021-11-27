@@ -1,15 +1,12 @@
 import './styles.css';
-import {
-  ContextMenu
-} from './menu';
+import { ContextMenu } from './menu';
 import { BackgroundModule } from './modules/background.module';
-import {
-  SoundModule
-} from './modules/sound.module';
+import { SoundModule } from './modules/sound.module';
+import { ClicksModule } from './modules/clicks.module';
 
 const menu = new ContextMenu('#menu');
 
-const modules = [new SoundModule('sound', 'Случайный звук'), new BackgroundModule('background', 'Случайный фон')];
+const modules = [new SoundModule('sound', 'Случайный звук'), new BackgroundModule('background', 'Случайный фон'), new ClicksModule('clicks', 'Подсчёт кликов'), ];
 
 menu.add(modules);
 

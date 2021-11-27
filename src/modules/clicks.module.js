@@ -1,4 +1,6 @@
-import {Module} from '../core/module';
+import {
+    Module
+} from '../core/module';
 
 export class ClicksModule extends Module {
     #time
@@ -7,21 +9,21 @@ export class ClicksModule extends Module {
     static initialParams = {
         type: 'clicks-analytics',
         time: 3,
-        text: `Считать клики за определенное время`,   
+        text: `Считать клики за определенное время`,
     }
-    
-    constructor() {     
+
+    constructor() {
         super(ClicksModule.initialParams.type, ClicksModule.initialParams.text);
         this.#timeRequest();
-         this.#clickCounts = {
-             singleClick: 0,
-             doubleClick: 0,
-             wheelClick: 0,
-         }
+        this.#clickCounts = {
+            singleClick: 0,
+            doubleClick: 0,
+            wheelClick: 0,
+        }
     }
 
     trigger() {
-       setTimeout(() => this.#finish(), this.#time * 1000); 
+        setTimeout(() => this.#finish(), this.#time * 1000);
         const body = document.querySelector('body');
         body.addEventListener('click', () => {
             this.#clickCounts.singleClick++;
@@ -64,5 +66,5 @@ export class ClicksModule extends Module {
     #timeRequest() {
         const time = Number(prompt('Введите время для подсчета кликов:').trim());
         this.#time = time || ClicksModule.initialParams.time;
-    }  
+    }
 }
