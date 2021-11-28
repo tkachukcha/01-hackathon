@@ -224,6 +224,7 @@ body {
     right: 10px;
     width: 45px;
     height: 45px;
+    cursor: pointer;
 }
 
 .timer__close::after{
