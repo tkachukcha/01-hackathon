@@ -1,4 +1,3 @@
-
 import { Module } from '../core/module';
 import * as Utils from '../utils'
 
@@ -6,7 +5,7 @@ const { random, remove, show, getCurPos, getRandomColor } = Utils
 
 export class ShapeModule extends Module {
   trigger(){  
-    const animation = [this.#triggerShape, this.triggerFigure, this.createLine]
+    const animation = [this.#triggerShape, this.#triggerFigure, this.#createLine]
     animation[random(0, animation.length - 1)]()
   }
  
@@ -33,7 +32,7 @@ export class ShapeModule extends Module {
     remove(figure)
   }
 
-  triggerFigure(){
+  #triggerFigure(){
     const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg")
     const svgNS = svg.namespaceURI
 
@@ -66,7 +65,7 @@ export class ShapeModule extends Module {
     remove(svg)
   }
  
-  createLine(){
+  #createLine(){
     const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg")
     const svgNS = svg.namespaceURI
     const x1 = random(1, 10)
@@ -90,7 +89,5 @@ export class ShapeModule extends Module {
     show(svg, false)
     document.body.append(svg) 
     remove(svg)
-  }
- 
- 
+  } 
 }
