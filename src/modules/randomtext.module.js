@@ -7,16 +7,21 @@ export class RandomtextModule extends Module {
         this.quotes = [];
         this.quoteHtml = this.makeQuoteHtml();
         this.timerId = null;
+        this.quoteDef = {
+            author: "Сервер",
+            body: "Я не отвечаю("
+        };
+        this.fetchQuotes();
     }
 
     trigger() {
         this.removeQuote();
         this.stopTimerOfQuote();
         this.showQuote(); 
-    }
+    }    
 
-    async showQuote() {
-        const q = await this.popQuote();
+    showQuote() {
+        const q = this.popQuote();
         this.setQuoteToHtml(q)
         document.body.append(this.quoteHtml);
         this.setTimerForQuote();
@@ -104,12 +109,22 @@ export class RandomtextModule extends Module {
         return body;
     }
 
-    async popQuote() {
+    popQuote() {
         if (!this.quotes.length) {
-            this.quotes = await this.getQuotes();
+            this.quotes.push(this.quoteDef);
+        }  
+
+        const q = this.quotes.pop();
+
+        if (!this.quotes.length) {
+            this.fetchQuotes();
         }
 
-        return this.quotes.pop();
+        return q;
+    }
+    
+    async fetchQuotes() {
+        this.quotes = await this.getQuotes();
     }
 
     async getQuotes() {
@@ -122,7 +137,7 @@ export class RandomtextModule extends Module {
                 }
             });
             const data = await response.json();
-        
+
             return data.quotes.map((q) => {  
                 return {
                     author: q.author,
@@ -130,10 +145,7 @@ export class RandomtextModule extends Module {
                 };
             });
         } catch(error) {
-            return [{
-                author: "Dmytro Lisnenko",
-                body: "Server is down("
-            }];
+            return [];
         }
     }   
 }
