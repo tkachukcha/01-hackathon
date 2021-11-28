@@ -265,10 +265,8 @@ body {
     padding: 10px;
     position: relative;
     z-index: 1000;
-    opacity: 1;
-    transition: opacity 0.2s ease;
 }
 
 .tooltip.hide {
-    opacity: 0;
+    display: none;
 }
