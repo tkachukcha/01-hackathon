@@ -41,7 +41,7 @@ const modules = [
 ];
 
 class App {
-  constructor(modules, menu) {
+  constructor(modules, menu, tooltip) {
     this.modules = modules;
     this.menu = menu;
   }
@@ -65,15 +65,16 @@ class App {
     }
 
     this.menu.open(mouseX, mouseY);
-    
     if(!this.menu.hasTriggered) {
       this.menu.el.addEventListener('click', triggerModule);
       this.menu.hasTriggered = true;
     }
     
-    
   }
+  
   run() {
+    this.menu.renderTooltip();
+    this.menu.showTooltip();
     this.menu.add(this.modules);
     const bindedContextMenu = this.showContextMenu.bind(this);
     document.body.addEventListener('contextmenu', bindedContextMenu);

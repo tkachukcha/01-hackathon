@@ -75,6 +75,8 @@ body {
   justify-content: center;
   align-items: center;
   transition: all 0.3s ease;
+  position: relative;
+  z-index: 1001;
 }
 
 .modal--hidden {
@@ -249,4 +251,24 @@ body {
     background: #000000;
     transform: rotate(135deg);
     border-radius: 10px;
+}
+
+/* Main tooltip */
+
+.tooltip {
+    width: 300px;
+    background-color: #ddd;
+    border: 1px solid #888;
+    border-radius:4px;
+    text-align: center;
+    margin: 10px auto 20px;
+    padding: 10px;
+    position: relative;
+    z-index: 1000;
+    opacity: 1;
+    transition: opacity 0.2s ease;
+}
+
+.tooltip.hide {
+    opacity: 0;
 }

@@ -5,11 +5,13 @@ export class ContextMenu extends Menu {
   constructor(selector) {
     super(selector);
     this.hasTriggered = false;
+    this.tooltip = document.createElement('div');
   }
   open(mouseX, mouseY) {
     this.el.classList.add('open');
     this.el.style.top = `${mouseY}px`;
     this.el.style.left = `${mouseX}px`;
+    this.hideTooltip();
   }
   close() {
     this.el.classList.remove('open');
@@ -24,5 +26,17 @@ export class ContextMenu extends Menu {
   }
   removeListener(eventType, func) {
     this.el.removeEventListener(eventType, func);
+  }
+  renderTooltip() {
+    this.tooltip.classList.add('tooltip');
+    this.tooltip.classList.add('hide');
+    this.tooltip.innerHTML = '<span>Для открытия меню нажмите правую кнопку мыши</span>';
+    document.body.append(this.tooltip);
+  }
+  showTooltip() {
+    this.tooltip.classList.remove('hide');
+  }
+  hideTooltip() {
+    this.tooltip.classList.add('hide');
   }
 }
