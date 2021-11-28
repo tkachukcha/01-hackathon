@@ -2,6 +2,10 @@ import {Menu} from './core/menu';
 import {stringToHTML} from './utils';
 
 export class ContextMenu extends Menu {
+  constructor(selector) {
+    super(selector);
+    this.hasTriggered = false;
+  }
   open(mouseX, mouseY) {
     this.el.classList.add('open');
     this.el.style.top = `${mouseY}px`;
