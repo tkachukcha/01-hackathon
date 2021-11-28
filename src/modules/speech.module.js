@@ -15,9 +15,9 @@ export class SpeechModule extends Module {
   }
 
   trigger() { 
-    const [lang, sentence] = this.#getSentences()
-
-    if (!this.#start) {
+     
+    if (this.#start === false) {
+      const [lang, sentence] = this.#getSentences()
       this.#start = true
 
       if ('speechSynthesis' in window) {
@@ -25,23 +25,14 @@ export class SpeechModule extends Module {
         this.#voice.lang = `${lang}`
         window.speechSynthesis.speak(this.#voice)
 
-        this.#voice.addEventListener('start' , (e) => {
-          this.#start = true
-          this.#showSentence(sentence)
-          console.log('Start')
-        })
-
-        this.#voice.addEventListener('end' , (e) => {
-          this.#start = false
-          console.log('END')
-        })
-
+        this.#start = true
+        this.#showSentence(sentence)
+ 
       } else {
         alert("Sorry, your browser doesn't support text to speech! 😣")
       }
     } else {
-      this.#showWaitAlert(this.#color)
-      //модалка - что чувак еще говорит
+      this.#showWaitAlert(this.#color) 
     } 
   }
 
@@ -127,7 +118,7 @@ export class SpeechModule extends Module {
     setTimeout(() => {
       messageBlock.style.bottom = '-120px'
       setTimeout(() => {
-        // messageBlock.remove()
+        messageBlock.remove()
         this.#start = false
       }, 400)
     }, msg.length * 60 + 500)
