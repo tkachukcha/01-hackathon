@@ -30,14 +30,14 @@ import {
 const menu = new ContextMenu('#menu');
 
 const modules = [
-  new SoundModule('sound', 'Рандомный звук'),
-  new Timer('timer', 'Таймер'),
+  new SoundModule('sound', 'Случайный звук'),
   new ShapeModule('shape', 'Случайная фигура'),
   new BackgroundModule('background', 'Случайный фон'),
   new RandomtextModule('randomtext', 'Случайная цитата'),
-  new ClicksModule(),
   new AnimationModule('animation', 'Случайная анимация'),
-  new SpeechModule('speech', 'Text to Speech'),
+  new SpeechModule('speech', 'Текст в речь'),
+  new Timer('timer', 'Таймер'),
+  new ClicksModule(),
 ];
 
 class App {
@@ -51,7 +51,7 @@ class App {
     const mouseX = event.pageX;
     const mouseY = event.pageY;
     const appMenu = this.menu;
-
+    
     function triggerModule(e) {
       const moduleType = e.target.dataset.type;
       modules.forEach(item => {
@@ -59,13 +59,19 @@ class App {
           item.trigger(e);
           appMenu.close();
           appMenu.removeListener('click', triggerModule);
+          appMenu.hasTriggered = false;
         }
       });
     }
 
     this.menu.open(mouseX, mouseY);
-    this.menu.el.addEventListener('click', triggerModule);
-
+    
+    if(!this.menu.hasTriggered) {
+      this.menu.el.addEventListener('click', triggerModule);
+      this.menu.hasTriggered = true;
+    }
+    
+    
   }
   run() {
     this.menu.add(this.modules);
@@ -75,5 +81,4 @@ class App {
 }
 
 const app = new App(modules, menu);
-
 app.run();
