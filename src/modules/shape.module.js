@@ -5,13 +5,13 @@ const { random, remove, show, getCurPos, getRandomColor } = Utils
 
 export class ShapeModule extends Module {
   trigger(){  
-    const animation = [this.#triggerShape, this.#triggerFigure, this.#createLine]
+    const animation = [this.#triggerShape]
     animation[random(0, animation.length - 1)]()
   }
  
   #triggerShape(){
     const { posX, posY, figureWidth, figureHeight } = getCurPos(100, 400)
-    const color = getRandomColor()
+    const color = getRandomColor() 
     
     const figure = document.createElement('div')
     figure.style.cssText = `
@@ -23,7 +23,7 @@ export class ShapeModule extends Module {
       border-radius: ${random(0, 50)}%; 
       background: ${color};
       opacity: 0;
-      transform: scale(0);
+      transform: scale(0) rotate(${random(0, 180)}deg);
       transition: 0.4s all ease
     `
 
@@ -33,13 +33,15 @@ export class ShapeModule extends Module {
   }
 
   #triggerFigure(){
+    const { posX, posY, figureWidth, figureHeight } = getCurPos(100, 400)
+
     const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg")
     const svgNS = svg.namespaceURI
 
     const x1 = random(1, 30)
     const y1 = random(1, 40)
-    const x2 = random(1, window.innerWidth / 3 ) * 0.3
-    const y2 = random(1, window.innerHeight / 3 ) * 0.3
+    const x2 = random(1, window.innerWidth / 4 ) * 0.3
+    const y2 = random(1, window.innerHeight / 4 ) * 0.3
 
     const rect = document.createElementNS(svgNS,'rect')
     rect.setAttribute('x', '0px')
@@ -52,8 +54,10 @@ export class ShapeModule extends Module {
     svg.setAttribute('viewBox', `0 0 ${random(100, x2)} ${random(100, y2)}` )
     svg.style.cssText = `
       position: absolute;
-      top: ${random(100, x2)}px; 
-      left: ${random(100, y2)}px;
+      top: ${posX}px; 
+      left: ${posY}px;
+      width: ${figureWidth}px;
+      height: ${figureHeight}px;
       opacity: 0; 
       transform: scale(0); 
       transition: 0.4s all ease;
@@ -62,16 +66,18 @@ export class ShapeModule extends Module {
 
     show(svg, false)
     document.body.append(svg) 
-    remove(svg)
+    // remove(svg)
   }
  
   #createLine(){
+    const { posX, posY, figureWidth, figureHeight } = getCurPos(100, 400)
+
     const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg")
     const svgNS = svg.namespaceURI
     const x1 = random(1, 10)
     const y1 = random(1, 10)
-    const x2 = random(1, window.innerWidth)
-    const y2 = random(1, window.innerHeight)
+    const x2 = random(1, window.innerWidth / random(3, 5))
+    const y2 = random(1, window.innerHeight / random(3, 5))
 
     const line = document.createElementNS(svgNS,'line')
     line.setAttribute('x1', x1)
@@ -83,11 +89,17 @@ export class ShapeModule extends Module {
 
     svg.appendChild(line)
     svg.setAttribute('viewBox', `0 0 ${random(100, x2)} ${random(100, y2)}`)
-    svg.style.cssText = `position: absolute; top:${0}px; left:${0}px`
+    svg.style.cssText = `
+      position: absolute;
+      top:${posX}px; 
+      left:${posY}px;
+      width: ${figureWidth}px;
+      height: ${figureHeight}px;
+      `
     document.body.appendChild(svg)
 
     show(svg, false)
     document.body.append(svg) 
-    remove(svg)
+    // remove(svg)
   } 
 }
