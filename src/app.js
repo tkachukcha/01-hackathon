@@ -20,6 +20,12 @@ import {
 import {
   ClicksModule
 } from './modules/clicks.module';
+import {
+  AnimationModule
+} from './modules/animation.module';
+import {
+  SpeechModule
+} from './modules/speech.module';
 
 const menu = new ContextMenu('#menu');
 
@@ -30,6 +36,8 @@ const modules = [
   new BackgroundModule('background', 'Случайный фон'),
   new RandomtextModule('randomtext', 'Случайная цитата'),
   new ClicksModule(),
+  new AnimationModule('animation', 'Случайная анимация'),
+  new SpeechModule('speech', 'Text to Speech'),
 ];
 
 class App {
