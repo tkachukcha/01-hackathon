@@ -1,14 +1,13 @@
-# Hackaton #1
+# Hackaton VM JS Course
 
-## Контекстное меню по нажатию правой кнопки мышки 
+## Right Click Context Menu
 #### Ver. 1.0
 
-### Модули
+### Modules
 
-- Таймер - Марина @Marina_Mari2021 
-- Аналитика кликов - Валерия @Aller_Fl
-- Случайный фон - Роман @savages0ul
-- Случайная фигура, Случайная анимация, Текст в речь - Василий @MadZephyr
-- Случайное сообщение - Дмитрий @dmytro_ls 
-- App, меню, случайный звук - Даниил @tkachukcha (тимлид)
-
+- Timer - Marina @Marina_Mari2021 
+- Clicks Analytics - Valeria @Aller_Fl
+- Random background - Roman @savages0ul
+- Random shape, random animation, text-to-speech - Vasiliy @MadZephyr
+- Случайное сообщение - Dmitriy @dmytro_ls 
+- App, menu, random sound - Dan @tkachukcha (teamlead)
